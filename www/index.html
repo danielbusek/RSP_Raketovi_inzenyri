@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrace uživatele</title>
+
+    <style>
+        :root {
+            --main-color: black;
+            --secondary-color: #f4f4f4;
+            --bg-form-color: white;
+
+            --font-family: Arial, sans-serif;
+            --border-radius: 10px;
+            --input-border-radius: 5px;
+            --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            --input-padding: 0.625rem 0;
+            --button-padding: 0.75rem;
+            --gap-large: 1rem;
+            --gap-small: 0.5rem;
+            --font-size: 1rem;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--secondary-color);
+            display: flex;
+            color: var(--main-color);
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: var(--bg-form-color);
+            padding: 20px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 350px;
+        }
+
+        #registerForm {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-large);
+        }
+
+        #registerForm div {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-small);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: var(--input-padding);
+            color: var(--main-color);
+            border: 0;
+            border-bottom: 1px solid var(--main-color);
+
+            outline: none;
+            font-size: var(--font-size);
+        }
+
+        button {
+            width: 100%;
+            background: var(--main-color);
+            color: var(--secondary-color);
+            padding: var(--button-padding);
+            border: none;
+            cursor: pointer;
+            font-size: var(--font-size);
+        }
+
+        button:hover {
+            background: grey;
+        }
+
+        .message {
+            text-align: center;
+            font-size: var(--font-size);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --main-color: rgb(224, 224, 224);
+                --secondary-color: #1e1e1e;
+                --bg-form-color: #2b2b2b;
+            }
+
+            input {
+                background-color: var(--bg-form-color);
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Registrace</h2>
+
+        <form id="registerForm">
+            <div>
+                <label for="jmeno">Jméno</label>
+                <input type="text" id="jmeno" name="jmeno" required>
+            </div>
+            <div>
+
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div>
+
+                <label for="heslo">Heslo</label>
+                <input type="password" id="heslo" name="heslo" required minlength="6">
+            </div>
+
+            <div>
+
+                <button type="submit">Registrovat se</button>
+            </div>
+
+            <div class="message" id="message"></div>
+        </form>
+    </div>
+
+    <script>
+ document.getElementById("registerForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const jmeno = document.getElementById("jmeno").value;
+    const email = document.getElementById("email").value;
+    const heslo = document.getElementById("heslo").value;
+
+    const response = await fetch('register.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jmeno, email, heslo })
+    });
+
+    const data = await response.json();
+    document.getElementById("message").innerText = data.message;
+
+    if (data.success) this.reset();
+});
+    </script>
+
+</body>
+
+</html>
+
