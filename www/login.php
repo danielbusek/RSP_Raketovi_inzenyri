@@ -1,47 +1,49 @@
 <?php
-session_start();
-header('Content-Type: application/json');
-
-$host = 'localhost';
-$db = 'myapp';
-$user = 'root';
-$pass = '';
-
-$spojeni = new mysqli($host, $user, $pass, $db);
-if ($spojeni->connect_error) {
-    die(json_encode(['success' => false, 'message' => 'Připojení k databázi se nezdařilo']));
-}
-
-$data = json_decode(file_get_contents('php://input'), true);
-$email = trim($data['email'] ?? '');
-$heslo = trim($data['heslo'] ?? '');
-
-if (!$email || !$heslo) {
-    echo json_encode(['success' => false, 'message' => 'Nevyplnili jste všechna pole.']);
-    exit;
-}
-
-$stmt = $spojeni->prepare("SELECT id, heslo FROM users WHERE email = ?");
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$stmt->store_result();
-
-if ($stmt->num_rows === 0) {
-    echo json_encode(['success' => false, 'message' => 'Neplatný e-mail nebo heslo']);
-    exit;
-}
-
-$stmt->bind_result($id, $hashHesla);
-$stmt->fetch();
-
-if (password_verify($heslo, $hashHesla)) {
-    $_SESSION['user_id'] = $id;
-
-    echo json_encode(['success' => true, 'message' => 'Přihlášení proběhlo úspěšně!']);
-} else {
-    echo json_encode(['success' => false, 'message' => 'Neplatný e-mail nebo heslo']);
-}
-
-$stmt->close();
-$spojeni->close();
+$page_title = "Přihlášení";
+$stylesheet = "style.css";
+require "header.php";
 ?>
+
+<div class="container">
+    <h2>Přihlášení</h2>
+
+    <form id="loginForm">
+        <div>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div>
+            <label for="heslo">Heslo</label>
+            <input type="password" id="heslo" name="heslo" required minlength="6">
+        </div>
+
+        <button type="submit">Přihlásit se</button>
+
+        <div class="message" id="message"></div>
+    </form>
+</div>
+
+<script>
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const heslo = document.getElementById("heslo").value;
+
+        const response = await fetch('login_functions.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, heslo })
+        });
+
+        const data = await response.json();
+        document.getElementById("message").innerText = data.message;
+
+        if (data.success) {
+            this.reset();
+        }
+    });
+</script>
+
+<?php require 'footer.php'; ?>
