@@ -1,6 +1,7 @@
 <?php
 $page_title = "Přihlášení";
 $stylesheet = "style.css";
+$use_nav = false;
 require "header.php";
 ?>
 
@@ -41,7 +42,9 @@ require "header.php";
         document.getElementById("message").innerText = data.message;
 
         if (data.success) {
-            this.reset();
+            setTimeout(() => {
+                window.location.href = "index.php";
+            }, 500);
         }
     });
 </script>

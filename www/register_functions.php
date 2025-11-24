@@ -7,7 +7,7 @@ $jmeno = trim($data['jmeno'] ?? '');
 $prijmeni = trim($data['prijmeni'] ?? '');
 $email = trim($data['email'] ?? '');
 $heslo = trim($data['heslo'] ?? '');
-$defaultRole = 'user';
+$defaultRole = 7;
 
 if (!$jmeno || !$prijmeni || !$email || !$heslo) {
     echo json_encode(['success' => false, 'message' => 'Nevyplnili jste všechna pole']);
@@ -39,8 +39,8 @@ $stmt->close();
 $hashHesla = password_hash($heslo, PASSWORD_DEFAULT);
 
 // OPRAVA — použití správné proměnné
-$stmt = $db_connection->prepare("INSERT INTO users (jmeno, prijmeni, email, heslo, role) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("sssss", $jmeno, $prijmeni, $email, $hashHesla, $defaultRole);
+$stmt = $db_connection->prepare("INSERT INTO users (jmeno, prijmeni, email, heslo, id_role) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssi", $jmeno, $prijmeni, $email, $hashHesla, $defaultRole);
 
 if ($stmt->execute()) {
 

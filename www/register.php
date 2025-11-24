@@ -1,6 +1,7 @@
 <?php
 $page_title = "Registrace";
 $stylesheet = "style.css";
+$use_nav = false;
 require "header.php";
 ?>
 
@@ -51,7 +52,15 @@ require "header.php";
         const data = await response.json();
         document.getElementById("message").innerText = data.message;
 
-        if (data.success) this.reset();
+        if (data.success) {
+            // Ukázat krátce informaci uživateli
+            document.getElementById("message").innerText = "Registrace proběhla úspěšně!";
+
+            // Redirect po 0.5s — působí to více user-friendly
+            setTimeout(() => {
+                window.location.href = "login.php";
+            }, 500);
+        }
     });
 </script>
 
