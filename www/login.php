@@ -2,13 +2,22 @@
 $page_title = "Přihlášení";
 $stylesheet = "style.css";
 $use_nav = false;
+$use_foot = false;
 require "header.php";
 ?>
 
 <div class="container">
     <h2>Přihlášení</h2>
 
-    <form id="loginForm">
+    <?php if (!empty($_GET['error'])): ?>
+        <div class="message" style="color:red;"><?= htmlspecialchars($_GET['error']) ?></div>
+    <?php endif; ?>
+
+    <?php if (!empty($_GET['success'])): ?>
+        <div class="message" style="color:green;"><?= htmlspecialchars($_GET['success']) ?></div>
+    <?php endif; ?>
+
+    <form action="login_functions.php" method="POST" id="loginForm">
         <div>
             <label for="email">E-mail</label>
             <input type="email" id="email" name="email" required>
@@ -24,29 +33,5 @@ require "header.php";
         <div class="message" id="message"></div>
     </form>
 </div>
-
-<script>
-    document.getElementById("loginForm").addEventListener("submit", async function(e) {
-        e.preventDefault();
-
-        const email = document.getElementById("email").value;
-        const heslo = document.getElementById("heslo").value;
-
-        const response = await fetch('login_functions.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, heslo })
-        });
-
-        const data = await response.json();
-        document.getElementById("message").innerText = data.message;
-
-        if (data.success) {
-            setTimeout(() => {
-                window.location.href = "index.php";
-            }, 500);
-        }
-    });
-</script>
 
 <?php require 'footer.php'; ?>

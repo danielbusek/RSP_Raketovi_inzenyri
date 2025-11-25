@@ -30,8 +30,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <title><?php page_title($GLOBALS['page_title'] ?? 'Můj web'); ?></title>
 </head>
 
-<body>
-
+<body class="d-flex flex-column min-vh-100">
 <?php if ($GLOBALS['use_nav'] ?? true): ?>
 <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">

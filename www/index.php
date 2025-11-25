@@ -37,20 +37,19 @@ $jmeno = $logged ? htmlspecialchars($_SESSION['user_jmeno']) : "";
     <!-- Sekce 2 – Zábavná kategorie -->
     <h4 class="section-title">Zábavná kategorie</h4>
 
-    <div class="row g-3">
-        <?php for ($i = 0; $i < 8; $i++): ?>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="article-card">
-                    <div class="img-placeholder"></div>
-                    <div class="body">
-                        <strong>Funny Title <?= $i+1 ?></strong><br>
-                        Kategorie: <em>Zábava</em><br>
-                        Popis článku...
-                    </div>
+    <div class="scroll-row">
+        <?php for ($i = 0; $i < 10; $i++): ?>
+            <div class="article-card">
+                <div class="img-placeholder"></div>
+                <div class="body">
+                    <strong>Title <?= $i+1 ?></strong><br>
+                    Kategorie: <em>Mix</em><br>
+                    Popis článku...
                 </div>
             </div>
         <?php endfor; ?>
     </div>
+
 
 </div>
 
