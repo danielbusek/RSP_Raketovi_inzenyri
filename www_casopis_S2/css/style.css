@@ -1,0 +1,424 @@
+/* --- 1. FONTS, VARIABLES & RESET --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;700&display=swap');
+
+:root {
+    --bg-dark: #0f1117;
+    --bg-card: #1c1e26;
+    --bg-footer: #0a0b10;
+    --primary-purple: #6e2bf9;
+    --neon-cyan: #00d2ff;
+    --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+    --text-white: #ffffff;
+    --text-gray: #94a3b8;
+    --border-color: #2d3748;
+}
+
+html, body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+    cursor: url('../media/rocket_cursor.svg') 0 0, auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+a,
+button,
+.btn {
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+a:hover,
+a:focus,
+a:active,
+.btn:hover,
+.btn:focus,
+.btn:active {
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+.text-muted {
+    color: #94a3b8 !important;
+}
+
+.btn,
+.nav-link,
+.article-card,
+input,
+.form-control,
+.dropdown-item {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* --- 2. HEADER --- */
+.navbar-render {
+    background: var(--primary-gradient);
+    box-shadow: 0 4px 20px rgba(110, 43, 249, 0.3);
+    padding: 0.8rem 0;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-size: 1.4rem;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: white !important;
+    transform: translateY(-1px);
+}
+
+.dropdown-menu {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+.dropdown-item {
+    color: var(--text-white);
+}
+
+.dropdown-item:hover {
+    background-color: var(--primary-purple);
+    color: white;
+}
+
+.btn-nav-login {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.btn-nav-signup {
+    background: white;
+    color: var(--primary-purple);
+    font-weight: bold;
+}
+
+/* --- 3. HERO SECTION --- */
+.hero-section {
+    position: relative;
+    padding: 100px 0 80px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background:
+        linear-gradient(to bottom, rgba(15, 17, 23, 0.3) 0%, var(--bg-dark) 100%),
+        linear-gradient(135deg, rgba(79, 70, 229, 0.4) 0%, rgba(147, 51, 234, 0.2) 100%),
+        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hero-section h1 {
+    background: linear-gradient(to right, #fff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(110, 43, 249, 0.3));
+    animation: zeroGravity 4s ease-in-out infinite;
+}
+
+@keyframes zeroGravity {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+        text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    50% {
+        transform: translateY(-15px);
+        text-shadow: 0 25px 25px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Hero Button Width Fix */
+.hero-section .btn-primary {
+    width: auto !important;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    margin-top: 2rem;
+    display: inline-block;
+}
+
+/* --- 4. CARDS & SCROLL --- */
+.scroll-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+    scrollbar-color: var(--primary-purple) var(--bg-dark);
+    scrollbar-width: thin;
+}
+
+.scroll-row::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroll-row::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+.scroll-row::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 4px;
+}
+
+.scroll-row::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-purple);
+}
+
+.scroll-row.active {
+    user-select: none;
+    cursor: grabbing;
+}
+
+.article-card {
+    width: 260px;
+    min-width: 260px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    color: var(--text-white);
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-purple);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.article-card .img-placeholder {
+    height: 140px;
+    background: linear-gradient(to bottom, #2d3748, #1a202c);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.article-card .body {
+    padding: 1.2rem;
+}
+
+.article-card .body strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.article-card .body em {
+    color: var(--primary-purple);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.section-title {
+    color: white;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--primary-purple);
+}
+
+/* --- 5. FORMS --- */
+#loginForm,
+#registerForm {
+    max-width: 420px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(110, 43, 249, 0.15);
+}
+
+.container h2 {
+    text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    color: var(--text-white);
+    font-weight: 700;
+}
+
+#loginForm>div,
+#registerForm>div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+    width: 100%;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+input,
+select,
+.form-control,
+textarea {
+    width: 100% !important;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid var(--border-color) !important;
+    color: white !important;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary-purple) !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 0 0 3px rgba(110, 43, 249, 0.25) !important;
+    outline: none;
+}
+
+button[type="submit"],
+.btn-primary {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.9rem;
+    background: var(--primary-gradient);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+button[type="submit"]:hover,
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(110, 43, 249, 0.5);
+}
+
+/* Shine Effect */
+.btn-primary::after,
+button[type="submit"]::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    transition: none;
+    z-index: -1;
+}
+
+.btn-primary:hover::after,
+button[type="submit"]:hover::after {
+    animation: shine 0.7s;
+}
+
+@keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+
+/* --- 6. FOOTER --- */
+footer {
+    background-color: var(--bg-footer);
+    border-top: 1px solid var(--border-color);
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    margin-top: auto;
+}
+
+footer h5 {
+    color: white;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+footer a {
+    color: var(--text-gray);
+    transition: 0.2s;
+}
+
+footer a:hover {
+    color: var(--primary-purple);
+}
+
+footer .list-unstyled li {
+    margin-bottom: 0.6rem;
+}
+
+footer .input-group {
+    display: flex !important;
+    width: 100%;
+}
+
+footer .input-group input {
+    width: auto !important;
+    flex-grow: 1;
+    margin-bottom: 0 !important;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+footer .input-group button {
+    width: auto !important;
+    margin-top: 0 !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* --- 7. TABLES --- */
+.table {
+    color: var(--text-gray);
+    border-color: var(--border-color);
+}
+
+.table> :not(caption)>*>* {
+    background-color: transparent;
+    color: var(--text-white);
+    border-bottom-color: var(--border-color);
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.table-hover>tbody>tr:hover>* {
+    background-color: rgba(110, 43, 249, 0.1);
+    color: white;
+}
+
+.table thead th {
+    background-color: var(--bg-card);
+    color: var(--primary-purple);
+    border-bottom: 2px solid var(--border-color);
+}
