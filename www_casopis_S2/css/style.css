@@ -57,7 +57,8 @@ a:hover,
 .article-card,
 input,
 .form-control,
-.dropdown-item {
+.dropdown-item,
+.page-link {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
@@ -244,31 +245,112 @@ option:disabled {
     text-transform: uppercase;
 }
 
-/* Dark Tables */
+/* Dark Tables (Admin & Lists) */
 .table {
-    color: var(--text-gray);
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text-gray);
     border-color: var(--border-color);
 }
 
-.table> :not(caption)>*>* {
-    background-color: transparent;
+.table th {
+    background-color: var(--bg-card);
     color: var(--text-white);
-    border-bottom-color: var(--border-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border-bottom: 2px solid var(--border-color);
 }
 
-.table-striped>tbody>tr:nth-of-type(odd)>* {
-    background-color: rgba(255, 255, 255, 0.03);
+.table td {
+    vertical-align: middle;
+    color: var(--text-gray);
 }
 
-.table-hover>tbody>tr:hover>* {
+.table tr:hover td {
+    color: white;
     background-color: rgba(110, 43, 249, 0.1);
+}
+
+/* Table Action Buttons (Admin) */
+.table .btn {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    padding: 0.3rem 0.7rem;
+    font-size: 0.85rem;
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
+
+.table .btn-warning {
+    color: #facc15;
+    border-color: rgba(250, 204, 21, 0.4);
+}
+
+.table .btn-warning:hover {
+    background: rgba(250, 204, 21, 0.1);
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.2);
+}
+
+.table .btn-danger {
+    color: #f87171;
+    border-color: rgba(248, 113, 113, 0.4);
+}
+
+.table .btn-danger:hover {
+    background: rgba(248, 113, 113, 0.1);
+    box-shadow: 0 0 10px rgba(248, 113, 113, 0.2);
+}
+
+.table .btn-secondary {
+    color: #94a3b8;
+    border-color: rgba(148, 163, 184, 0.4);
+}
+
+.table .btn-secondary:hover {
+    background: rgba(148, 163, 184, 0.1);
     color: white;
 }
 
-.table thead th {
+.table .btn-info {
+    color: var(--neon-cyan);
+    border-color: rgba(0, 210, 255, 0.4);
+}
+
+.table .btn-info:hover {
+    background: rgba(0, 210, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+}
+
+/* Pagination (Admin) */
+.pagination {
+    margin-top: 2rem;
+}
+
+.page-link {
     background-color: var(--bg-card);
-    color: var(--primary-purple);
-    border-bottom: 2px solid var(--border-color);
+    border-color: var(--border-color);
+    color: var(--text-gray);
+    margin: 0 3px;
+    border-radius: 6px;
+}
+
+.page-link:hover {
+    background-color: #2d3748;
+    color: white;
+    border-color: var(--primary-purple);
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-purple);
+    border-color: var(--primary-purple);
+    color: white;
+    box-shadow: 0 0 10px rgba(110, 43, 249, 0.4);
+}
+
+.page-item.disabled .page-link {
+    background-color: transparent;
+    border-color: transparent;
+    color: #475569;
 }
 
 /* --- 5. HEADER & NAV --- */
@@ -367,7 +449,7 @@ option:disabled {
 }
 
 /* --- 7. DASHBOARD, ADMIN & LISTS --- */
-/* A) Scroll Row (Úvodní stránka) */
+/* Scroll Row (Index) */
 .scroll-row {
     display: flex;
     overflow-x: auto;
@@ -394,14 +476,14 @@ option:disabled {
     background: var(--primary-purple);
 }
 
-/* B) Default Card Width (pro Scroll Row) */
 .article-card {
     width: 260px;
     min-width: 260px;
 }
 
-/* C) FIX: Karta v Dashboardu/Adminu (Roztáhnout na 100%) */
-/* Pokud je karta v .container (My Articles) nebo v .row (Admin), zrušíme 260px */
+/* Default card width */
+
+/* FIX: Card in Admin/Grid (Full Width) */
 .container>.article-card,
 .row .article-card {
     width: 100% !important;
@@ -417,7 +499,6 @@ option:disabled {
     border-left: 4px solid var(--primary-purple);
 }
 
-/* Dashboard Header Button Fix */
 .d-flex .btn-primary {
     width: auto !important;
     margin-top: 0 !important;
@@ -426,7 +507,6 @@ option:disabled {
     height: fit-content;
 }
 
-/* Dashboard Filter Alignment */
 .article-card form .col-md-4,
 .article-card form .col-md-3,
 .article-card form .col-md-2 {
@@ -471,6 +551,10 @@ option:disabled {
 #registerForm button {
     width: 100%;
     margin-top: 1.5rem;
+    padding: 0.8rem 1rem;
+    min-height: 50px;
+    font-size: 1.1rem;
+    /* Velké tlačítko */
 }
 
 /* --- 9. FOOTER --- */

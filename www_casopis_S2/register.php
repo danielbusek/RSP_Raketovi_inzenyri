@@ -6,7 +6,8 @@ $use_foot = false;
 require "header.php";
 ?>
 
-<div class="container">
+<div class="container d-flex flex-column justify-content-center flex-grow-1">
+
     <h2>Registrace</h2>
 
     <?php if (!empty($_GET['error'])): ?>
