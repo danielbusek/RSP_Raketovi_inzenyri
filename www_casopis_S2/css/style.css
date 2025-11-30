@@ -1,4 +1,4 @@
-/* --- 1. FONTS, VARIABLES & RESET --- */
+/* --- 1. SETUP & VARIABLES --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;700&display=swap');
 
 :root {
@@ -13,15 +13,16 @@
     --border-color: #2d3748;
 }
 
-html, body {
+html,
+body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-white);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    
-    cursor: url('../media/rocket_cursor.svg') 0 0, auto;
+    /* Raketový kurzor */
+    cursor: url('../media/raketa.svg') 0 0, auto;
 }
 
 h1,
@@ -34,6 +35,7 @@ h5,
     font-weight: 700;
 }
 
+/* Global Reset & Transitions */
 a,
 button,
 .btn {
@@ -42,12 +44,7 @@ button,
 }
 
 a:hover,
-a:focus,
-a:active,
-.btn:hover,
-.btn:focus,
-.btn:active {
-    text-decoration: none !important;
+.btn:hover {
     outline: none !important;
 }
 
@@ -64,7 +61,217 @@ input,
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* --- 2. HEADER --- */
+/* --- 2. COMPONENTS: BUTTONS --- */
+button[type="submit"],
+.btn-primary {
+    background: var(--primary-gradient);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Shine Effect */
+.btn-primary::after,
+button[type="submit"]::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    transition: none;
+    z-index: -1;
+}
+
+.btn-primary:hover::after,
+button[type="submit"]:hover::after {
+    animation: shine 0.7s;
+}
+
+@keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+
+.btn-primary:hover,
+button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(110, 43, 249, 0.5);
+}
+
+/* --- 3. COMPONENTS: FORMS & INPUTS --- */
+input,
+select,
+.form-control,
+textarea {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--primary-purple) !important;
+    box-shadow: 0 0 0 3px rgba(110, 43, 249, 0.25) !important;
+    outline: none;
+}
+
+::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+    opacity: 1;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Custom Select Arrow */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 10px center !important;
+    padding-right: 30px !important;
+    cursor: pointer;
+}
+
+option {
+    background-color: var(--bg-card);
+    color: white;
+}
+
+option:disabled {
+    color: #ff6b6b;
+    font-style: italic;
+}
+
+/* Input Groups */
+.input-group {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch;
+    width: 100%;
+}
+
+.input-group .form-control {
+    width: auto !important;
+    flex: 1 1 auto;
+    margin-bottom: 0 !important;
+}
+
+.input-group .btn,
+.input-group .input-group-text {
+    width: auto !important;
+    margin-top: 0 !important;
+}
+
+.input-group .btn:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+
+.input-group .form-control:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+}
+
+.input-group .form-control:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.input-group .btn:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* --- 4. COMPONENTS: CARDS & TABLES --- */
+.article-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    color: var(--text-white);
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-purple);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.article-card .img-placeholder {
+    height: 140px;
+    background: linear-gradient(to bottom, #2d3748, #1a202c);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.article-card .body {
+    padding: 1.2rem;
+}
+
+.article-card .body strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.article-card .body em {
+    color: var(--primary-purple);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+/* Dark Tables */
+.table {
+    color: var(--text-gray);
+    border-color: var(--border-color);
+}
+
+.table> :not(caption)>*>* {
+    background-color: transparent;
+    color: var(--text-white);
+    border-bottom-color: var(--border-color);
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.table-hover>tbody>tr:hover>* {
+    background-color: rgba(110, 43, 249, 0.1);
+    color: white;
+}
+
+.table thead th {
+    background-color: var(--bg-card);
+    color: var(--primary-purple);
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* --- 5. HEADER & NAV --- */
 .navbar-render {
     background: var(--primary-gradient);
     box-shadow: 0 4px 20px rgba(110, 43, 249, 0.3);
@@ -112,7 +319,7 @@ input,
     font-weight: bold;
 }
 
-/* --- 3. HERO SECTION --- */
+/* --- 6. HERO SECTION --- */
 .hero-section {
     position: relative;
     padding: 100px 0 80px 0;
@@ -151,7 +358,6 @@ input,
     }
 }
 
-/* Hero Button Width Fix */
 .hero-section .btn-primary {
     width: auto !important;
     padding-left: 3rem;
@@ -160,7 +366,8 @@ input,
     display: inline-block;
 }
 
-/* --- 4. CARDS & SCROLL --- */
+/* --- 7. DASHBOARD, ADMIN & LISTS --- */
+/* A) Scroll Row (Úvodní stránka) */
 .scroll-row {
     display: flex;
     overflow-x: auto;
@@ -187,50 +394,19 @@ input,
     background: var(--primary-purple);
 }
 
-.scroll-row.active {
-    user-select: none;
-    cursor: grabbing;
-}
-
+/* B) Default Card Width (pro Scroll Row) */
 .article-card {
     width: 260px;
     min-width: 260px;
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    overflow: hidden;
-    color: var(--text-white);
 }
 
-.article-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary-purple);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.article-card .img-placeholder {
-    height: 140px;
-    background: linear-gradient(to bottom, #2d3748, #1a202c);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.article-card .body {
-    padding: 1.2rem;
-}
-
-.article-card .body strong {
-    display: block;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: white;
-}
-
-.article-card .body em {
-    color: var(--primary-purple);
-    font-style: normal;
-    font-weight: 600;
-    font-size: 0.85rem;
-    text-transform: uppercase;
+/* C) FIX: Karta v Dashboardu/Adminu (Roztáhnout na 100%) */
+/* Pokud je karta v .container (My Articles) nebo v .row (Admin), zrušíme 260px */
+.container>.article-card,
+.row .article-card {
+    width: 100% !important;
+    min-width: 100% !important;
+    margin-bottom: 2rem;
 }
 
 .section-title {
@@ -241,7 +417,29 @@ input,
     border-left: 4px solid var(--primary-purple);
 }
 
-/* --- 5. FORMS --- */
+/* Dashboard Header Button Fix */
+.d-flex .btn-primary {
+    width: auto !important;
+    margin-top: 0 !important;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    height: fit-content;
+}
+
+/* Dashboard Filter Alignment */
+.article-card form .col-md-4,
+.article-card form .col-md-3,
+.article-card form .col-md-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.article-card form .btn {
+    width: 100%;
+}
+
+/* --- 8. AUTH FORMS --- */
 #loginForm,
 #registerForm {
     max-width: 420px;
@@ -269,84 +467,13 @@ input,
     width: 100%;
 }
 
-label {
-    margin-bottom: 0.5rem;
-    color: #e2e8f0;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-input,
-select,
-.form-control,
-textarea {
-    width: 100% !important;
-    box-sizing: border-box;
-    background-color: rgba(0, 0, 0, 0.2) !important;
-    border: 1px solid var(--border-color) !important;
-    color: white !important;
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: var(--primary-purple) !important;
-    background-color: rgba(0, 0, 0, 0.4) !important;
-    box-shadow: 0 0 0 3px rgba(110, 43, 249, 0.25) !important;
-    outline: none;
-}
-
-button[type="submit"],
-.btn-primary {
+#loginForm button,
+#registerForm button {
     width: 100%;
     margin-top: 1.5rem;
-    padding: 0.9rem;
-    background: var(--primary-gradient);
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
 }
 
-button[type="submit"]:hover,
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(110, 43, 249, 0.5);
-}
-
-/* Shine Effect */
-.btn-primary::after,
-button[type="submit"]::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
-    transform: skewX(-25deg);
-    transition: none;
-    z-index: -1;
-}
-
-.btn-primary:hover::after,
-button[type="submit"]:hover::after {
-    animation: shine 0.7s;
-}
-
-@keyframes shine {
-    100% {
-        left: 125%;
-    }
-}
-
-/* --- 6. FOOTER --- */
+/* --- 9. FOOTER --- */
 footer {
     background-color: var(--bg-footer);
     border-top: 1px solid var(--border-color);
@@ -376,49 +503,19 @@ footer .list-unstyled li {
     margin-bottom: 0.6rem;
 }
 
-footer .input-group {
-    display: flex !important;
-    width: 100%;
-}
+/* --- 10. MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+    .article-card {
+        padding: 1rem !important;
+    }
 
-footer .input-group input {
-    width: auto !important;
-    flex-grow: 1;
-    margin-bottom: 0 !important;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
+    .table td,
+    .table th {
+        padding: 0.5rem !important;
+        font-size: 0.85rem;
+    }
 
-footer .input-group button {
-    width: auto !important;
-    margin-top: 0 !important;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-/* --- 7. TABLES --- */
-.table {
-    color: var(--text-gray);
-    border-color: var(--border-color);
-}
-
-.table> :not(caption)>*>* {
-    background-color: transparent;
-    color: var(--text-white);
-    border-bottom-color: var(--border-color);
-}
-
-.table-striped>tbody>tr:nth-of-type(odd)>* {
-    background-color: rgba(255, 255, 255, 0.03);
-}
-
-.table-hover>tbody>tr:hover>* {
-    background-color: rgba(110, 43, 249, 0.1);
-    color: white;
-}
-
-.table thead th {
-    background-color: var(--bg-card);
-    color: var(--primary-purple);
-    border-bottom: 2px solid var(--border-color);
+    .hero-section h1 {
+        font-size: 2rem;
+    }
 }
