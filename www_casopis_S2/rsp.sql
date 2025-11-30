@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Pát 28. lis 2025, 21:10
+-- Vytvořeno: Ned 30. lis 2025, 19:02
 -- Verze serveru: 10.4.32-MariaDB
 -- Verze PHP: 8.2.12
 
@@ -30,9 +30,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `articles` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `issue_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `filename` varchar(255) NOT NULL,
-  `status` enum('podano','recenze','prijato','zamitnuto') NOT NULL DEFAULT 'podano',
+  `status` enum('podano','recenze','oprava','prijato','zamitnuto') NOT NULL DEFAULT 'podano',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -40,8 +41,34 @@ CREATE TABLE `articles` (
 -- Vypisuji data pro tabulku `articles`
 --
 
-INSERT INTO `articles` (`id`, `user_id`, `title`, `filename`, `status`, `created_at`) VALUES
-(1, 6, 'How to Write a Professional Business Letter', '6_1764345869_Business Letter.docx', 'podano', '2025-11-28 16:04:29');
+INSERT INTO `articles` (`id`, `user_id`, `issue_id`, `title`, `filename`, `status`, `created_at`) VALUES
+(1, 6, 0, 'How to Write a Professional Business Letter', '6_1764345869_Business Letter.docx', 'podano', '2025-11-28 16:04:29');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `issues`
+--
+
+CREATE TABLE `issues` (
+  `id` int(11) NOT NULL,
+  `nazev` varchar(255) NOT NULL,
+  `rocnik` int(11) NOT NULL DEFAULT 2025,
+  `cislo` int(11) NOT NULL DEFAULT 1,
+  `deadline` date NOT NULL,
+  `max_capacity` int(11) NOT NULL DEFAULT 10,
+  `status` enum('open','closed','published') NOT NULL DEFAULT 'open'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Vypisuji data pro tabulku `issues`
+--
+
+INSERT INTO `issues` (`id`, `nazev`, `rocnik`, `cislo`, `deadline`, `max_capacity`, `status`) VALUES
+(1, 'Jaro 2025 - Černé díry', 2025, 1, '2026-03-31', 5, 'open'),
+(2, 'Léto 2025 - AI v kosmonautice', 2025, 1, '2026-06-30', 10, 'open'),
+(3, 'Podzim 2025 - Speciál: Mars', 2025, 1, '2026-09-30', 3, 'open'),
+(4, 'Testovací Zima 2026', 2026, 1, '2025-12-26', 10, 'open');
 
 -- --------------------------------------------------------
 
@@ -112,6 +139,12 @@ ALTER TABLE `articles`
   ADD KEY `fk_articles_users` (`user_id`);
 
 --
+-- Indexy pro tabulku `issues`
+--
+ALTER TABLE `issues`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexy pro tabulku `role`
 --
 ALTER TABLE `role`
@@ -135,6 +168,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `articles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pro tabulku `issues`
+--
+ALTER TABLE `issues`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pro tabulku `role`
