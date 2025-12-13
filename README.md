@@ -1,8 +1,28 @@
 # 🚀 RSP_2025_RaketovíInženýři 🚀
 Repozitář určen pro spolupráci studentů na předmětu RSP
 
-## 🕐 Excel pro zápis hodin 🕐
-https://vspj.sharepoint.com/:x:/r/sites/SP2526-Raketovineni/_layouts/15/Doc2.aspx?action=edit&sourcedoc=%7B94f2c3ba-d611-4f69-9e02-84938cbd7ea7%7D&wdOrigin=TEAMS-WEB.teamsSdk_ns.rwc&wdExp=TEAMS-TREATMENT&wdhostclicktime=1758698514487&web=1
+#Odkaz na funkční aplikaci (nenovější verze)#
+http://195.113.207.163/~busek02/www_casopis/
+##Přihlašovací údaje##
+###Šéfredaktor###
+- sefredaktor@example.com
+- sefredaktor123
+
+###Redaktor###
+- redaktor@example.com
+- redaktor123
+
+###Autor###
+- autor@example.com
+- autor123
+
+###Admin###
+- admin@example.com
+- admin123
+
+###Čtenář###
+- ctenar@example.com
+- ctenar123
 
 
 ## Scrum desk odkaz 
