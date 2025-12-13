@@ -1,26 +1,26 @@
 # 🚀 RSP_2025_RaketovíInženýři 🚀
 Repozitář určen pro spolupráci studentů na předmětu RSP
 
-#Odkaz na funkční aplikaci (nenovější verze)#
+# Odkaz na funkční aplikaci (nenovější verze) #
 http://195.113.207.163/~busek02/www_casopis/
-##Přihlašovací údaje##
-###Šéfredaktor###
+## Přihlašovací údaje ##
+### Šéfredaktor ###
 - sefredaktor@example.com
 - sefredaktor123
 
-###Redaktor###
+### Redaktor ###
 - redaktor@example.com
 - redaktor123
 
-###Autor###
+### Autor ###
 - autor@example.com
 - autor123
 
-###Admin###
+### Admin ###
 - admin@example.com
 - admin123
 
-###Čtenář###
+### Čtenář ###
 - ctenar@example.com
 - ctenar123
 
